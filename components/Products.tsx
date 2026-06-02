@@ -439,10 +439,16 @@ export default function Products() {
               <tr key={p._id} className="trow">
                 <td>
                   <div style={{ display: "flex", alignItems: "center", gap: 10 }}>
-                    {p.mainImage
-                      ? <Image src={p.mainImage} className="img-thumb" alt={p.name} width={60} height={60} style={{ objectFit: "cover" }} unoptimized />
-                      : <div style={{ width: 60, height: 60, borderRadius: 6, background: "#1e1e2e", display: "flex", alignItems: "center", justifyContent: "center", fontSize: 18 }}>📦</div>
-                    }
+                    {p.mainImage ? (
+                      <img 
+                        src={p.mainImage} 
+                        alt={p.name}
+                        className="img-thumb"
+                        style={{ width: 60, height: 60, objectFit: "cover", borderRadius: 6, border: "1px solid #1e1e2e" }}
+                      />
+                    ) : (
+                      <div style={{ width: 60, height: 60, borderRadius: 6, background: "#1e1e2e", display: "flex", alignItems: "center", justifyContent: "center", fontSize: 18 }}>📦</div>
+                    )}
                     <div>
                       <div style={{ fontWeight: 600 }}>{p.name}</div>
                       <div style={{ fontSize: 11, color: "#555570" }}>{p.shortDescription.substring(0, 30)}...</div>
