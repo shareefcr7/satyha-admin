@@ -1,0 +1,74 @@
+@import "tailwindcss";
+
+:root {
+  --background: #ffffff;
+  --foreground: #171717;
+  --brand: #2D3A8C;
+  --brand-dark: #1e2a6e;
+  --brand-light: #ffffff;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-brand: var(--brand);
+  --color-brand-dark: var(--brand-dark);
+  --color-brand-light: var(--brand-light);
+  --font-sans: var(--font-geist-sans);
+  --font-mono: var(--font-geist-mono);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --background: #0a0a0a;
+    --foreground: #ededed;
+  }
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+/* ========== RESPONSIVE UTILITIES ========== */
+
+@media (max-width: 1920px) {
+  :root { font-size: 14px; }
+}
+
+@media (max-width: 1366px) {
+  :root { font-size: 13px; }
+}
+
+@media (max-width: 1024px) {
+  :root { font-size: 12px; }
+}
+
+@media (max-width: 768px) {
+  body { font-size: 14px; }
+  .mobile-stack { flex-direction: column; width: 100%; }
+  .modal { width: calc(100vw - 32px) !important; max-width: 100% !important; }
+}
+
+@media (max-width: 640px) {
+  body { font-size: 13px; }
+  main { padding: 12px !important; }
+  * { max-width: 100%; }
+  button, input, select, textarea { min-height: 44px; font-size: 16px; }
+  .modal { width: calc(100vw - 24px) !important; }
+}
+
+@media (max-width: 480px) {
+  body { font-size: 12px; }
+  main { padding: 8px !important; }
+}
+
+@media print {
+  .no-print { display: none; }
+}
+
+@media (max-height: 500px) and (orientation: landscape) {
+  main { padding: 8px !important; }
+  h1 { font-size: 18px !important; }
+}

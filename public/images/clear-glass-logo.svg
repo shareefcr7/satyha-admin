@@ -1,0 +1,29 @@
+<svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+  <!-- Dark Blue Background Circle -->
+  <circle cx="100" cy="100" r="100" fill="#1e3a8a"/>
+  
+  <!-- Cyan C curve (outer accent) -->
+  <path d="M 140 65 A 40 40 0 0 1 140 135" 
+        stroke="#00d4ff" stroke-width="18" fill="none" stroke-linecap="round"/>
+  
+  <!-- White G letter -->
+  <g>
+    <!-- Top right curve -->
+    <path d="M 80 60 A 35 35 0 0 1 120 75" 
+          stroke="white" stroke-width="16" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+    
+    <!-- Left vertical curve -->
+    <path d="M 70 75 A 40 40 0 0 0 70 130" 
+          stroke="white" stroke-width="16" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+    
+    <!-- Bottom right curve -->
+    <path d="M 70 130 A 35 35 0 0 0 110 140" 
+          stroke="white" stroke-width="16" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+    
+    <!-- Inner horizontal line -->
+    <line x1="110" y1="110" x2="135" y2="110" stroke="white" stroke-width="16" stroke-linecap="round"/>
+    
+    <!-- Right vertical line -->
+    <line x1="135" y1="90" x2="135" y2="125" stroke="white" stroke-width="16" stroke-linecap="round"/>
+  </g>
+</svg>

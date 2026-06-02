@@ -1,0 +1,19 @@
+{
+  "name": "Clear Glass Admin Panel",
+  "short_name": "CG Admin",
+  "description": "Clear Glass Admin - Control center for managing products, categories, and banners",
+  "theme_color": "#2D3A8C",
+  "background_color": "#0f0f13",
+  "display": "standalone",
+  "orientation": "portrait",
+  "scope": "/",
+  "start_url": "/admin/categories",
+  "icons": [
+    {
+      "src": "/apple-touch-icon.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "maskable any"
+    }
+  ]
+}
