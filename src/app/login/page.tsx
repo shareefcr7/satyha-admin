@@ -47,16 +47,22 @@ export default function LoginPage() {
           "Content-Type": "application/json",
         },
         credentials: 'include',
+        mode: 'cors',
         body: JSON.stringify({ email: normalizedEmail, password }),
       });
 
       console.log("Response status:", res.status);
 
       if (!res.ok) {
-        const data = await res.json();
-        console.error("Login error response:", data);
-        setError(data.error || "Login failed"); // Display error to the user
-        throw new Error(data.error || "Login failed");
+        let errorData;
+        try {
+          errorData = await res.json();
+        } catch {
+          errorData = { error: `HTTP ${res.status}: ${res.statusText}` };
+        }
+        console.error("Login error response:", errorData);
+        setError(errorData.error || "Login failed");
+        throw new Error(errorData.error || "Login failed");
       }
 
       const data = await res.json();
@@ -113,6 +119,7 @@ export default function LoginPage() {
               type="email"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
+              placeholder="admin@clearglass.com"
               required
               style={{
                 width: "100%",
@@ -133,6 +140,7 @@ export default function LoginPage() {
               type="password"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
+              placeholder="admin123"
               required
               style={{
                 width: "100%",
