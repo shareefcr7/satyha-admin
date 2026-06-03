@@ -565,7 +565,7 @@ export default function Products() {
                 <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fill, minmax(80px, 1fr))", gap: 8 }}>
                   {gallery.map((img, i) => (
                     <div key={i} style={{ position: "relative", width: "100%", paddingBottom: "100%", borderRadius: 8, overflow: "hidden", border: "1px solid #1e1e2e" }}>
-                      <Image src={img} alt={`gallery-${i}`} fill style={{ objectFit: "cover", position: "absolute" }} unoptimized />
+                      <Image src={img} alt={`gallery-${i}`} fill style={{ objectFit: "contain", position: "absolute" }} unoptimized />
                       <button className="img-remove" onClick={() => removeGalleryImage(i)}>×</button>
                     </div>
                   ))}

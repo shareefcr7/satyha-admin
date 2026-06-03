@@ -183,8 +183,8 @@ export default function Banners() {
           <div key={banner._id} className="card banner-card" style={{ overflow: "hidden", opacity: banner.isActive ? 1 : 0.5, display: "flex", padding: 16, justifyContent: "space-between", alignItems: "center" }}>
             {/* Banner previews */}
             <div className="banner-preview-wrapper">
-              {/* Desktop preview */}
-              <div className="banner-preview-item">
+              {/* Desktop preview - contain fit */}
+              <div className="banner-preview-item" style={{ backgroundImage: `url(${banner.desktopImage})`, backgroundSize: "contain", backgroundPosition: "center", backgroundRepeat: "no-repeat" }}>
                 <span className="banner-preview-label">Desktop</span>
                 <div className="banner-preview-image" style={{ width: "240px", height: "120px" }}>
                   <Image src={banner.desktopImage} alt="desktop banner" width={240} height={120} style={{ width: "100%", height: "100%", objectFit: "cover" }} />
