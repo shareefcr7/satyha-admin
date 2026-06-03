@@ -1,7 +1,6 @@
 "use client";
 import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
-import { getApiUrl } from "../../../lib/getApiUrl";
 
 export default function LoginPage() {
   const router = useRouter();
@@ -10,7 +9,6 @@ export default function LoginPage() {
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
   const [checking, setChecking] = useState(true);
-  const apiUrl = getApiUrl();
 
   useEffect(() => {
     const token = localStorage.getItem("token");
@@ -40,6 +38,11 @@ export default function LoginPage() {
       }
 
       const normalizedEmail = email.toLowerCase().trim();
+
+      // Get API URL at runtime (not module load time)
+      const apiUrl = typeof window !== 'undefined' 
+        ? (process.env.NEXT_PUBLIC_API_URL || 'https://clear-glass-backend.vercel.app/api')
+        : 'https://clear-glass-backend.vercel.app/api';
 
       console.log("Attempting login with:", { email: normalizedEmail, apiUrl });
 
