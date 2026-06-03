@@ -2,7 +2,6 @@
 import { useState, useEffect, useCallback, ReactNode } from "react";
 import Image from "next/image";
 import { fetchWithAuth } from "../lib/fetchWithAuth";
-import { getApiUrl } from "../lib/getApiUrl";
 
 type Banner = {
   _id: string;
@@ -27,17 +26,17 @@ export default function Banners() {
   const [mobileFit, setMobileFit] = useState("cover");
   const [mobilePosition, setMobilePosition] = useState("center");
   const [loading, setLoading] = useState(false);
-  const api = getApiUrl();
 
   const fetchBanners = useCallback(async () => {
     try {
-      const res = await fetch(`${api}/banner`);
+      const api = process.env.NEXT_PUBLIC_API_URL || 'https://clear-glass-backend.vercel.app/api';
+      const res = await fetchWithAuth(`${api}/banner`);
       const data = await res.json();
       if (data.banners) setBanners(data.banners);
     } catch (err) {
       console.error(err);
     }
-  }, [api]);
+  }, []);
 
   useEffect(() => { fetchBanners(); }, [fetchBanners]);
 
@@ -67,6 +66,7 @@ export default function Banners() {
     if (!desktopImage || !mobileImage) return;
     setLoading(true);
     try {
+      const api = process.env.NEXT_PUBLIC_API_URL || 'https://clear-glass-backend.vercel.app/api';
       const res = await fetchWithAuth(`${api}/banner/add`, {
         method: "POST",
         body: JSON.stringify({
@@ -99,6 +99,7 @@ export default function Banners() {
     if (!confirm("Delete this banner?")) return;
     const authToken = localStorage.getItem("token") || "";
     if (!authToken) { alert('Not logged in — please sign in to perform this action.'); return; }
+    const api = process.env.NEXT_PUBLIC_API_URL || 'https://clear-glass-backend.vercel.app/api';
     const res = await fetchWithAuth(`${api}/banner/delete/${id}`, { method: "DELETE" });
     if (res.ok) setBanners(prev => prev.filter(b => b._id !== id));
   };
