@@ -37,7 +37,7 @@ export default function LoginPage() {
       }
 
       const normalizedEmail = email.toLowerCase().trim();
-      const apiUrl = process.env.NEXT_PUBLIC_API_URL || 'https://clear-glass-backend.vercel.app/api';
+      const apiUrl = process.env.NEXT_PUBLIC_API_URL;
 
       console.log("Attempting login with:", { email: normalizedEmail, apiUrl });
 
