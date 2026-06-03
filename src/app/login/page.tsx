@@ -27,7 +27,6 @@ export default function LoginPage() {
     setError("");
 
     try {
-      // Validate email format
       const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
       if (!emailRegex.test(email)) {
         throw new Error("Please enter a valid email address");
@@ -38,17 +37,16 @@ export default function LoginPage() {
       }
 
       const normalizedEmail = email.toLowerCase().trim();
-
-      // Get API URL at runtime (not module load time)
-      const apiUrl = typeof window !== 'undefined' 
-        ? (process.env.NEXT_PUBLIC_API_URL || 'https://clear-glass-backend.vercel.app/api')
-        : 'https://clear-glass-backend.vercel.app/api';
+      const apiUrl = process.env.NEXT_PUBLIC_API_URL || 'https://clear-glass-backend.vercel.app/api';
 
       console.log("Attempting login with:", { email: normalizedEmail, apiUrl });
 
       const res = await fetch(`${apiUrl}/auth/login`, {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
+        headers: { 
+          "Content-Type": "application/json",
+        },
+        credentials: 'include',
         body: JSON.stringify({ email: normalizedEmail, password }),
       });
 
