@@ -13,7 +13,13 @@ export async function fetchWithAuth(input: RequestInfo, init: RequestInit = {}) 
       if (!headers.get('Content-Type')) headers.set('Content-Type', 'application/json');
     }
 
-    const res = await fetch(input, { ...init, headers, body } as RequestInit);
+    const res = await fetch(input, { 
+      ...init, 
+      headers, 
+      body,
+      credentials: 'include',
+      mode: 'cors'
+    } as RequestInit);
 
     if (res.status === 401) {
       let msg = 'Session expired — please sign in again.';
@@ -29,6 +35,7 @@ export async function fetchWithAuth(input: RequestInfo, init: RequestInit = {}) 
 
     return res;
   } catch (err) {
+    console.error('fetchWithAuth error:', err);
     throw err;
   }
 }
