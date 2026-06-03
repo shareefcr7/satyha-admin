@@ -56,11 +56,11 @@ export default function Products() {
   const [offerAmount, setOfferAmount] = useState("");
   const [sellingPrice, setSellingPrice] = useState("");
   const [totalStock, setTotalStock] = useState("");
-
-  const api = getApiUrl();
+  const [api, setApi] = useState("");
 
   // Fetch functions
   const fetchProducts = useCallback(async () => {
+    if (!api) return;
     try {
       const res = await fetchWithAuth(`${api}/product`);
       const data = await res.json();
@@ -86,8 +86,9 @@ export default function Products() {
   }, [api]);
 
   const fetchCategories = useCallback(async () => {
+    if (!api) return;
     try {
-      const res = await fetch(`${api}/category`);
+      const res = await fetchWithAuth(`${api}/category`);
       if (!res.ok) throw new Error(`API error: ${res.status}`);
       const data = await res.json();
       if (Array.isArray(data)) {
@@ -104,8 +105,9 @@ export default function Products() {
   }, [api]);
 
   const fetchSubcategories = useCallback(async () => {
+    if (!api) return;
     try {
-      const res = await fetch(`${api}/subcategory`);
+      const res = await fetchWithAuth(`${api}/subcategory`);
       if (!res.ok) throw new Error(`API error: ${res.status}`);
       const data = await res.json();
       if (data.subcategories && Array.isArray(data.subcategories)) {
@@ -122,10 +124,16 @@ export default function Products() {
   }, [api]);
 
   useEffect(() => {
-    fetchProducts();
-    fetchCategories();
-    fetchSubcategories();
-  }, [fetchProducts, fetchCategories, fetchSubcategories]);
+    setApi(getApiUrl());
+  }, []);
+
+  useEffect(() => {
+    if (api) {
+      fetchProducts();
+      fetchCategories();
+      fetchSubcategories();
+    }
+  }, [api, fetchProducts, fetchCategories, fetchSubcategories]);
 
   // Auto-calculate selling price
   useEffect(() => {
